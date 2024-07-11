@@ -6,6 +6,7 @@ void saludo(int n);
 int menu(); 
 void lectura_calificaciones (float notas[]);
 void buscar_calificaciones(float &buscar, float notas[]);
+void insertar_cal(float &insert, float notas[], int &pos);
 const int max_calificaciones = 50;
 
 int main (){
@@ -21,8 +22,21 @@ int main (){
         switch(opcion){
             case 1:{
                 saludo(opcion); 
+                cout << "Para dejar de ingresar notas ingrese \' -1 \': \n";
                 lectura_calificaciones(notas);
-                cout << "Que desea hacer: \n Buscar calificación:";
+                cout << "Que desea hacer: \n 1.-Buscar calificación:";
+                cout << "2.-Eliminar nota: \n";
+                cout << "3.-Editar nota: \n";
+                cout << "4.- Ver lista de notas \n";
+                cout << "0. Salir \n";
+                switch (opcion){
+                case 1:
+                buscar_calificaciones(x,notas);
+                    break;
+                
+                default:
+                    break;
+                }
                 buscar_calificaciones(x, notas);
                 break;
             }
@@ -108,4 +122,12 @@ void buscar_calificaciones(float &buscar, float notas[]){
         if (buscar == notas[i])
             cout << "Calificacion encontrada en la posición: " << i + 1 << endl;
     }
+}
+
+void insertar_cal(float &insert, float notas[], int &pos){
+    cout << "Ingrese la posicion de la nota que desea modificar: \n";
+    cin >> pos;
+    cout << "Ingrese la nueva nota: \n";
+    cin >> insert;
+    insert = notas [pos + 1 ] 
 }
