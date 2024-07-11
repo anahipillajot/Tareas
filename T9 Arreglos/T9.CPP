@@ -14,8 +14,9 @@ void insertar_cal(float &insert, float notas[], int &pos);
 void ver_notas(float notas[], int n_notas);
 void eliminar_nota(float notas[], int &n_notas, int pos);
 bool palindromo(char palabra[], int longitud);
+void duplicados(float numeros[], float &n);
 
-const int max_calificaciones = 50;
+const int max_calificaciones = 50, max_3=20;
 
 int main() {
     cout << "Bienvenido al programa ejercicio de arreglos" << endl;
@@ -24,7 +25,7 @@ int main() {
     cout << "Escoja qué ejercicio desea visualizar" << endl;
     
     int opcion, n_notas = 0, op, pos; 
-    float notas[max_calificaciones];
+    float notas[max_calificaciones], numeros[max_3];
     char palabra[max_calificaciones];
     float x;
     
@@ -84,7 +85,8 @@ int main() {
                 }
                 break;}
             case 3:{
-                saludo(opcion); 
+                saludo(opcion);
+                duplicados(numeros, x);
                 break;}
             case 4:{
                 saludo(opcion); 
@@ -192,4 +194,28 @@ bool palindromo(char palabra[], int longitud){
     }
 
     return true;
+}
+
+// EJERCICIO 3.
+
+void duplicados(float numeros[], float &n){
+    float n1 = 0;
+    numeros[max_3];
+    for (int i = 0; i < max_3; i++){
+            cout << "Ingrese un numero.- ";
+            cin >> n1;
+            numeros [i] = n1;
+        for (int j = 0; j < i; j++){
+            cout << numeros[j+i] << endl;
+            if (numeros[j] == n1){
+                cout << "n repetido \n";
+                break; break;
+            }
+            else if (numeros[j+i] != n1){
+                cout << "Numero unico. \n";
+                numeros[i] = n1;
+            }
+        }
+        
+    }
 }
