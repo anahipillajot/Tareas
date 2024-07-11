@@ -2,12 +2,12 @@
 #include <string>
 #include <iomanip>
 #include <cctype>
+#include <random>
 using namespace std; 
 
+//FUNCIONES PROTOTIPOS
 void saludo(int n);
 int menu(); 
-
-//FUNCIONES PROTOTIPOS
 void lectura_calificaciones(float notas[], int &n_notas);
 void buscar_calificaciones(float &buscar, float notas[], int n_notas);
 void insertar_cal(float &insert, float notas[], int &pos);
@@ -15,8 +15,9 @@ void ver_notas(float notas[], int n_notas);
 void eliminar_nota(float notas[], int &n_notas, int pos);
 bool palindromo(char palabra[], int longitud);
 void duplicados(float numeros[], int &n);
+void simularTiros(int frecuencias[], int num_tiros);
 
-const int max_calificaciones = 50, max_3=20;
+const int max_calificaciones = 50, max_3=20 ,num_tiros = 36000, min_suma = 2, max_suma = 12;
 
 int main() {
     cout << "Bienvenido al programa ejercicio de arreglos" << endl;
@@ -25,6 +26,7 @@ int main() {
     cout << "Escoja qué ejercicio desea visualizar" << endl;
     
     int opcion, n_notas = 0, op, pos; 
+    int frecuencias[max_suma + 1];
     float notas[max_calificaciones], numeros[max_3];
     char palabra[max_calificaciones];
     float x;
@@ -90,6 +92,17 @@ int main() {
                 break;}
             case 4:{
                 saludo(opcion); 
+                simularTiros(frecuencias, num_tiros);
+                    cout << "Suma\tFrecuencia" << endl;
+                    for (int i = min_suma; i <= max_suma; i++) {
+                        cout << i << "\t" << frecuencias[i] << endl;
+                    }
+
+                    // Determinar si los totales son razonables
+                    cout << "\nVerificación de totales razonables:" << endl;
+                    cout << "Frecuencia esperada para 7: aproximadamente " << num_tiros / 6 << endl;
+                    cout << "Frecuencia real para 7: " << frecuencias[7] << endl;
+
                 break;}
             default:
                 cout << "Opción no válida." << endl;
@@ -241,3 +254,22 @@ void duplicados(float numeros[], int &n) {
 }
 
 //EJERCICIO 4
+void simularTiros(int frecuencias[], int num_tiros) {
+    // biblioteca random
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> distribucion(1, 6);
+
+    // Arreglo
+    for (int i = 0; i <= max_suma; i++) {
+        frecuencias[i] = 0;
+    }
+
+    // Simular los tiros de los dados
+    for (int i = 0; i < num_tiros; i++) {
+        int dado1 = distribucion(gen);
+        int dado2 = distribucion(gen);
+        int suma = dado1 + dado2;
+        frecuencias[suma]++;
+    }
+}
