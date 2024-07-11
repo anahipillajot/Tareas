@@ -1,9 +1,10 @@
 #include <iostream>
-using namespace std; 
 #include <string>
 #include <iomanip>
+using namespace std; 
 void saludo(int n);
 int menu(); 
+//FUNCIONES PROTOTIPOS
 void lectura_calificaciones (float notas[]);
 void buscar_calificaciones(float &buscar, float notas[]);
 void insertar_cal(float &insert, float notas[], int &pos);
@@ -15,7 +16,7 @@ int main (){
     cout << "Autores: Anahi Pillajo, Eduardo Castro" << endl;
     cout << "Menu de ejercicios realizados" << endl;
     cout << "Escoja que ejercicio desea visualizar" << endl;
-    int opcion,x1,op; 
+    int opcion, n_notas=0,op,pos; 
     float notas[max_calificaciones];
     float x;
     opcion= menu();
@@ -34,16 +35,22 @@ int main (){
                 while (op != 0){
                 switch (op){
                 case 1:
-                buscar_calificaciones(x,notas);
-                    break;
+                cout << "Ingrese la nota que desea buscar: ";
+                cin >> x;
+                buscar_calificaciones(x, notas);
+                break;
                 case 2:
-
+                cout << "Ingrese la posición de la nota que desea eliminar: ";
+                cin >> pos;
+                eliminar_nota(x, notas, n_notas);
                 
                 case 3:
-                insertar_cal(x,notas,x1);
+                insertar_cal(x,notas,n_notas);
                     break;
                 case 4:
-                ver_notas(notas);
+                ver_notas(notas, n_notas);
+                    break;
+                case 0:
                     break;
                 default:
                 cout << "Opcion no valida. " << endl;
@@ -103,12 +110,13 @@ void saludo(int n) {
     cout << "Autores: Anahi Pillajo, Eduardo Castro" << endl;
 }
 
-void lectura_calificaciones (float notas[]){
+void lectura_calificaciones (float notas[], int &n_notas){
     for(int i = 0; i < max_calificaciones; i++){
         cout << "Ingresa las calificaciones \n";
         cin >> notas[i];
         if (notas[i] == -1){
         break;
+        n_notas ++;
         }
     } 
 }
@@ -149,9 +157,12 @@ void eliminar_nota(float &borra, float notas[],int &pos ){
 
 }
 
-void ver_notas(float notas[]){
-    for (int i = 0; i < max_calificaciones; i++){
-        cout << "[ " << notas[i] << ", " ; 
+void ver_notas(float notas[], int n_notas){
+    for (int i = 0; i < n_notas; i++){
+        cout << "[" << notas[i] << "]";
+        if (i < n_notas - 1) {
+            cout << ", ";
+        }
     }
-    cout << "]";
+
 }
