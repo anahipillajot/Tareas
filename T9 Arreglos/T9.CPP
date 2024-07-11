@@ -7,6 +7,7 @@ int menu();
 void lectura_calificaciones (float notas[]);
 void buscar_calificaciones(float &buscar, float notas[]);
 void insertar_cal(float &insert, float notas[], int &pos);
+void ver_notas(float notas[]);
 const int max_calificaciones = 50;
 
 int main (){
@@ -14,7 +15,7 @@ int main (){
     cout << "Autores: Anahi Pillajo, Eduardo Castro" << endl;
     cout << "Menu de ejercicios realizados" << endl;
     cout << "Escoja que ejercicio desea visualizar" << endl;
-    int opcion; 
+    int opcion,x1,op; 
     float notas[max_calificaciones];
     float x;
     opcion= menu();
@@ -24,20 +25,31 @@ int main (){
                 saludo(opcion); 
                 cout << "Para dejar de ingresar notas ingrese \' -1 \': \n";
                 lectura_calificaciones(notas);
-                cout << "Que desea hacer: \n 1.-Buscar calificación:";
+                cout << "Que desea hacer: \n 1.-Buscar calificación: \n";
                 cout << "2.-Eliminar nota: \n";
                 cout << "3.-Editar nota: \n";
                 cout << "4.- Ver lista de notas \n";
                 cout << "0. Salir \n";
-                switch (opcion){
+                cin >> op;
+                while (op != 0){
+                switch (op){
                 case 1:
                 buscar_calificaciones(x,notas);
                     break;
+                case 2:
+
                 
+                case 3:
+                insertar_cal(x,notas,x1);
+                    break;
+                case 4:
+                ver_notas(notas);
+                    break;
                 default:
+                cout << "Opcion no valida. " << endl;
                     break;
                 }
-                buscar_calificaciones(x, notas);
+                }
                 break;
             }
             case 2:{
@@ -114,8 +126,7 @@ void ordenar_calificaciones (float notas[]){
     }
 }
 
-void buscar_calificaciones(float &buscar, float notas[]){
-    
+void buscar_calificaciones(float &buscar, float notas[]){   
     cout << "Ingrese la nota que desea buscar: \n";
     cin >> buscar;
     for (int i = 0 ; i < max_calificaciones ; i++){
@@ -129,5 +140,18 @@ void insertar_cal(float &insert, float notas[], int &pos){
     cin >> pos;
     cout << "Ingrese la nueva nota: \n";
     cin >> insert;
-    insert = notas [pos + 1 ] 
+    insert = notas [pos + 1 ];
+}
+
+void eliminar_nota(float &borra, float notas[],int &pos ){
+    cout << "Ingrese la posicion de la nota que desea eliminar: \n";
+    cin >> pos;
+
+}
+
+void ver_notas(float notas[]){
+    for (int i = 0; i < max_calificaciones; i++){
+        cout << "[ " << notas[i] << ", " ; 
+    }
+    cout << "]";
 }
