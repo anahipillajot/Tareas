@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <cctype>
 using namespace std; 
 
 void saludo(int n);
@@ -12,6 +13,7 @@ void buscar_calificaciones(float &buscar, float notas[], int n_notas);
 void insertar_cal(float &insert, float notas[], int &pos);
 void ver_notas(float notas[], int n_notas);
 void eliminar_nota(float notas[], int &n_notas, int pos);
+bool palindromo(char palabra[], int longitud);
 
 const int max_calificaciones = 50;
 
@@ -23,6 +25,7 @@ int main() {
     
     int opcion, n_notas = 0, op, pos; 
     float notas[max_calificaciones];
+    char palabra[max_calificaciones];
     float x;
     
     opcion = menu();
@@ -67,15 +70,25 @@ int main() {
                     }
                 } while (op != 0);
                 break;
-            case 2:
+            case 2:{
                 saludo(opcion); 
-                break;
-            case 3:
+                cout << "Ingrese una palabra para verificar si es un palíndromo: ";
+                cin >> palabra;
+                int longitud = 0;
+                  while (palabra[longitud] != '\0' && longitud < max_calificaciones) {
+                    longitud++; }
+                 if (palindromo(palabra, longitud)) {
+                    cout << "La palabra es un palíndromo." << endl;
+                } else {
+                    cout << "La palabra no es un palíndromo." << endl;
+                }
+                break;}
+            case 3:{
                 saludo(opcion); 
-                break;
-            case 4:
+                break;}
+            case 4:{
                 saludo(opcion); 
-                break;
+                break;}
             default:
                 cout << "Opción no válida." << endl;
                 break;
@@ -157,4 +170,26 @@ void ver_notas(float notas[], int n_notas) {
         }
     }
     cout << endl;
+}
+
+//EJERCICIO 2.
+
+bool palindromo(char palabra[], int longitud){
+   char palabra_n[max_calificaciones];
+    int long_palabra = 0;
+
+    // Copiar y convertir a minúsculas
+    for (int i = 0; i < longitud; i++) {
+        if (palabra[i] != ' ') {
+            palabra_n[long_palabra++] = tolower(palabra[i]);
+        }
+    }
+   // Comprobación de palíndromo
+    for (int i = 0, j = long_palabra - 1; i < j; i++, j--) {
+        if (palabra_n[i] != palabra_n[j]) {
+            return false;
+        }
+    }
+
+    return true;
 }
