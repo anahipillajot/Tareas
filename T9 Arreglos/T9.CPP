@@ -14,7 +14,7 @@ void insertar_cal(float &insert, float notas[], int &pos);
 void ver_notas(float notas[], int n_notas);
 void eliminar_nota(float notas[], int &n_notas, int pos);
 bool palindromo(char palabra[], int longitud);
-void duplicados(float numeros[], float &n);
+void duplicados(float numeros[], int &n);
 
 const int max_calificaciones = 50, max_3=20;
 
@@ -86,7 +86,7 @@ int main() {
                 break;}
             case 3:{
                 saludo(opcion);
-                duplicados(numeros, x);
+                duplicados(numeros, n_notas);
                 break;}
             case 4:{
                 saludo(opcion); 
@@ -198,24 +198,46 @@ bool palindromo(char palabra[], int longitud){
 
 // EJERCICIO 3.
 
-void duplicados(float numeros[], float &n){
-    float n1 = 0;
-    numeros[max_3];
-    for (int i = 0; i < max_3; i++){
-            cout << "Ingrese un numero.- ";
-            cin >> n1;
-            numeros [i] = n1;
-        for (int j = 0; j < i; j++){
-            cout << numeros[j+i] << endl;
-            if (numeros[j] == n1){
-                cout << "n repetido \n";
-                break; break;
-            }
-            else if (numeros[j+i] != n1){
-                cout << "Numero unico. \n";
-                numeros[i] = n1;
+void duplicados(float numeros[], int &n) {
+    float n1;
+    n1 = 0;
+
+    for (int i = 0; i < max_3; i++) {
+        bool esDuplicado = false;
+        cout << "Ingrese un numero entre 10 y 100: ";
+        cin >> n1;
+
+        // Validar que el número esté en el rango
+        if (n1 < 10 || n1 > 100 || n == ' ') {
+            cout << "Numero fuera de rango. Intente de nuevo." << endl;
+            i--; // Volver a pedir el número
+            continue;
+        }
+
+        // Verificar si el número es un duplicado
+        for (int j = 0; j < n; j++) {
+            if (numeros[j] == n1) {
+                esDuplicado = true;
+                cout << "Numero duplicado. Intente de nuevo." << endl;
+                i--;
+                break;
             }
         }
-        
+
+        // Si no es un duplicado, agregarlo al arreglo
+        if (!esDuplicado) {
+            numeros[n] = n1;
+            n++;
+        }
     }
+
+    // Mostrar los números únicos ingresados
+    cout << "Numeros unicos ingresados: ";
+    for (int i = 0; i < n; i++) {
+        cout << numeros[i] << " ";
+    }
+    cout << endl;
+
 }
+
+//EJERCICIO 4
