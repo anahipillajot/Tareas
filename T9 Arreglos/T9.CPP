@@ -16,7 +16,7 @@ void eliminar_nota(float notas[], int &n_notas, int pos);
 bool palindromo(char palabra[], int longitud);
 void duplicados(float numeros[], int &n);
 void simularTiros(int frecuencias[], int num_tiros);
-
+//CONSTANTES GLOBALES
 const int max_calificaciones = 50, max_3=20 ,num_tiros = 36000, min_suma = 2, max_suma = 12;
 
 int main() {
@@ -24,7 +24,7 @@ int main() {
     cout << "Autores: Anahi Pillajo, Eduardo Castro" << endl;
     cout << "Menu de ejercicios realizados" << endl;
     cout << "Escoja qué ejercicio desea visualizar" << endl;
-    
+    //VARIABLES USADAS
     int opcion, n_notas = 0, op, pos; 
     int frecuencias[max_suma + 1];
     float notas[max_calificaciones], numeros[max_3];
@@ -32,13 +32,14 @@ int main() {
     float x;
     
     opcion = menu();
-    
+    //MENU GENERAL
     while (opcion != 0) {
         switch(opcion) {
             case 1:
                 saludo(opcion); 
                 cout << "Para dejar de ingresar notas ingrese '-1': \n";
                 lectura_calificaciones(notas, n_notas);
+                //SUBMENU 1
                 do {
                     cout << "Que desea hacer: \n 1.-Buscar calificación\n";
                     cout << "2.-Eliminar nota\n";
@@ -111,7 +112,7 @@ int main() {
         opcion = menu();
     }
 }
-
+//MENU Y SALUDO
 int menu() {
     int op = -1;
     while (op < 0 || op > 4) {
@@ -134,7 +135,7 @@ void saludo(int n) {
     cout << "Bienvenido al ejercicio " << n << endl;
     cout << "Autores: Anahi Pillajo, Eduardo Castro" << endl;
 }
-
+// EJERCICIO 1 
 void lectura_calificaciones(float notas[], int &n_notas) {
     for (int i = 0; i < max_calificaciones; i++) {
         cout << "Ingresa la calificación: ";
